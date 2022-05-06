@@ -7,7 +7,7 @@ import pandas as pd
 from math import sqrt
 from bs4 import BeautifulSoup
 
-nlp = spacy.load('models\en_core_web_md')
+nlp = spacy.load('models\en_core_web_md\en_core_web_md-3.2.0')
 
 #####-----Backend Functions-----#####
 
