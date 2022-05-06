@@ -1,5 +1,5 @@
 streamlit
 imutils
 opencv-python-headless
-spacy
+spacy == 3.2.4
 bs4
