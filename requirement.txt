@@ -1,0 +1,4 @@
+streamlit
+imutils
+opencv-python
+spacy
