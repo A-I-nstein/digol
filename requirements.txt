@@ -6,3 +6,4 @@ pinecone-client
 tensorflow_hub
 tensorflow
 bs4
+tensorrt
