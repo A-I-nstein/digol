@@ -1,6 +1,7 @@
 #####-----importing neccessary libraries-----#####
 
 import pinecone
+import streamlit as st
 from streamlit.connections import ExperimentalBaseConnection
 from pinecone.core.client.model.query_response import QueryResponse 
 
@@ -10,10 +11,10 @@ class PineconeConnection(ExperimentalBaseConnection[pinecone.Index]):
 
     def _connect(self, **kwargs) -> pinecone.Index:
         pinecone.init(
-            api_key = self._secrets["pinecone_api_key"],
-            environment = self._secrets["pinecone_environment"]
+            api_key = st.secrets["pinecone_api_key"],
+            environment = st.secrets["pinecone_environment"]
             )
-        index = pinecone.Index(self._secrets["index_name"])
+        index = pinecone.Index(st.secrets["index_name"])
         return index
     
     def cursor(self) -> pinecone.Index:
