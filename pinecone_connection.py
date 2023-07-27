@@ -24,7 +24,7 @@ class PineconeConnection(ExperimentalBaseConnection[pinecone.Index]):
         return self._instance
     
     def query(self, query: list, n: int, ttl: int = 3600, **kwargs) -> QueryResponse:
-        @cache_data(ttl=ttl)
+        @st.cache_data(ttl=ttl)
         def _query(query: list, n: int, **kwargs) -> QueryResponse:
             cursor = self.cursor()
             result = cursor.query([query], top_k=n, include_metadata=True)
