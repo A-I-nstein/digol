@@ -1,29 +1,23 @@
 #####-----importing neccessary libraries-----#####
 
-import os
 import requests
-import pinecone
-import numpy as np
 import pandas as pd
+import streamlit as st
 import tensorflow_hub as hub
 from bs4 import BeautifulSoup
+from pinecone_connection import PineconeConnection
 
-pinecone.init(
-    api_key = os.environ.get("PINECONE_API_KEY"),
-    environment = os.environ.get("PINECONE_ENVIRONMENT")
-)
-index = pinecone.Index(os.environ.get("index_name"))
 model = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2")
 
 #####-----Backend Functions-----#####
 
 def to_float(n):
-  return float(n)
+    return float(n)
 
 def get_top_n(query, n):
-    embedding = model(list(query))
-    embedding = list(map(to_float, list((np.array(embedding[0])))))
-    result = index.query([embedding], top_k=n, include_metadata=True)
+    connection = st.experimental_connection("pinecone", type = PineconeConnection)
+    result = connection.query(query, n)
+    print(result)
     return result
 
 def load_base_notes():
