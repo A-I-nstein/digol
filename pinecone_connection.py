@@ -10,8 +10,8 @@ class PineconeConnection(ExperimentalBaseConnection[pinecone.Index]):
 
     def _connect(self, **kwargs) -> pinecone.Index:
         pinecone.init(
-            api_key = self._secrets["PINECONE_API_KEY"],
-            environment = self._secrets["PINECONE_ENVIRONMENT"]
+            api_key = self._secrets["pinecone_api_key"],
+            environment = self._secrets["pinecone_environment"]
             )
         index = pinecone.Index(self._secrets["index_name"])
         return index
