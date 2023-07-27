@@ -1,7 +1,6 @@
 #####-----importing neccessary libraries-----#####
 
 import os
-import spacy
 import requests
 import pinecone
 import numpy as np
@@ -10,7 +9,6 @@ from math import sqrt
 import tensorflow_hub as hub
 from bs4 import BeautifulSoup
 
-nlp = spacy.load('models/en_core_web_md/en_core_web_md-3.2.0')
 pinecone.init(
     api_key = os.environ.get("PINECONE_API_KEY"),
     environment = os.environ.get("PINECONE_ENVIRONMENT")
