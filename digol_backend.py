@@ -1,6 +1,7 @@
 #####-----importing neccessary libraries-----#####
 
 import requests
+import numpy as np
 import pandas as pd
 import streamlit as st
 import tensorflow_hub as hub
@@ -15,8 +16,10 @@ def to_float(n):
     return float(n)
 
 def get_top_n(query, n):
+    embedding = model(list(query))
+    embedding = list(map(to_float, list((np.array(embedding[0])))))
     connection = st.experimental_connection("pinecone", type = PineconeConnection)
-    result = connection.query(query, n)
+    result = connection.query(embedding, n)
     print(result)
     return result
 
