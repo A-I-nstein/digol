@@ -28,7 +28,7 @@ class PineconeConnection(ExperimentalBaseConnection[pinecone.Index]):
         def _query(query: list, n: int, **kwargs) -> QueryResponse:
             cursor = self.cursor()
             result = cursor.query([query], top_k=n, include_metadata=True)
-            return result
+            return result.to_dict()
 
         return _query(query, n, **kwargs)
         
