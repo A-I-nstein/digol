@@ -3,7 +3,6 @@
 import pinecone
 import streamlit as st
 from streamlit.connections import ExperimentalBaseConnection
-from pinecone.core.client.model.query_response import QueryResponse 
 
 #####-----main connection clas-----#####
 
@@ -23,9 +22,9 @@ class PineconeConnection(ExperimentalBaseConnection[pinecone.Index]):
         self._instance = self._connect()
         return self._instance
     
-    def query(self, query: list, n: int, ttl: int = 3600, **kwargs) -> QueryResponse:
+    def query(self, query: list, n: int, ttl: int = 3600, **kwargs) -> dict:
         @st.cache_data(ttl=ttl)
-        def _query(query: list, n: int, **kwargs) -> QueryResponse:
+        def _query(query: list, n: int, **kwargs) -> dict:
             cursor = self.cursor()
             result = cursor.query([query], top_k=n, include_metadata=True)
             return result.to_dict()
